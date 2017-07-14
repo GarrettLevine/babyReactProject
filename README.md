@@ -1,4 +1,4 @@
-# Lil Baby React Project
+# 'Lil React Project
 This project is used for people just wanting to get their feet wet with react
 
 ## Getting Started
