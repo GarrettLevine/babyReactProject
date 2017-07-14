@@ -9,13 +9,10 @@ class App extends React.Component {
         <div className="hero is-primary topNav">
           <nav className="nav">
             <div className="nav-left nav-item">
-              <h1 className="title is-3">`Lil 👼 Baby 👼 React Project</h1>
+              <h1 className="title is-3">Get Me Giphs</h1>
             </div>
           </nav>
         </div>
-
-        <input />
-
       </section>
     );
   }
