@@ -14,10 +14,8 @@ class App extends React.Component {
     };
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
-    fetch(`http://api.giphy.com/v1/gifs/search?api_key=${this.state.apiKey}&q=${this.state.value}&limit=18`, {
+  handleSubmit(value) {
+    fetch(`http://api.giphy.com/v1/gifs/search?api_key=${this.state.apiKey}&q=${value}&limit=18`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/jsonp',
@@ -43,7 +41,12 @@ class App extends React.Component {
         </div>
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            <form onSubmit={this.handleSubmit}>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                this.handleSubmit(this.state.value);
+              }}
+            >
               <div className="field">
                 <p className="control">
                   <input
@@ -63,31 +66,33 @@ class App extends React.Component {
           </div>
         </div>
         <div className="columns is-multiline">
-          { this.state.giphs.map(giph => {
-              return (
-                <div key={giph.id} className="column is-2">
-                  <div className="card">
-                    <div className="card-image">
-                      <figure className="image is-4by3">
-                        <img src={giph.images.original.webp} alt="Image" />
-                      </figure>
-                      <a
-                        className="button is-small is-primary"
-                        onClick={() => {
-                          document.execCommand('Copy', false, giph.images.original.url);
-                        }}
-                      >
-                        Copy
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          { this.state.giphs.map(giph => <Giph key={giph.id} giph={giph} />)}
           </div>
       </section>
     );
   }
 }
+
+const Giph = (props) => {
+  return (
+    <div className="column is-2">
+      <div className="card">
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <img src={props.giph.images.original.webp} alt="Image" />
+          </figure>
+          <a
+            className="button is-small is-primary"
+            onClick={() => {
+              document.execCommand('Copy', false, props.giph.images.original.webp);
+            }}
+          >
+            Copy
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('main'));
