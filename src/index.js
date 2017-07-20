@@ -84,7 +84,7 @@ const Giph = (props) => {
           <a
             className="button is-small is-primary"
             onClick={() => {
-              document.execCommand('Copy', false, props.giph.images.original.webp);
+              document.execCommand('copy');
             }}
           >
             Copy
