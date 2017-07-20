@@ -19,6 +19,13 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    stats: {
+      chunkModules: false,
+      colors: true,
+      path: path.resolve(__dirname, 'public'),
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
